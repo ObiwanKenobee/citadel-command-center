@@ -5,7 +5,11 @@ class ResizeObserverMock {
   unobserve() {}
   disconnect() {}
 }
-(globalThis as any).ResizeObserver = (globalThis as any).ResizeObserver || ResizeObserverMock;
+(globalThis as any).ResizeObserver = ResizeObserverMock;
+if (typeof window !== "undefined") (window as any).ResizeObserver = ResizeObserverMock;
+if (typeof window !== "undefined") {
+  (window as any).HTMLElement.prototype.scrollIntoView = () => {};
+}
 
 Object.defineProperty(window, "matchMedia", {
   writable: true,
