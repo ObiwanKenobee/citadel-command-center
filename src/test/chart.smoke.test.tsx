@@ -24,30 +24,32 @@ describe("chart smoke", () => {
   it("renders a LineChart with tooltip + legend", () => {
     const { container } = render(
       <ChartContainer config={config} className="h-40 w-80">
-        <LineChart data={data}>
+        <LineChart data={data} width={320} height={160}>
           <XAxis dataKey="name" />
           <YAxis />
           <ChartTooltip content={<ChartTooltipContent />} />
           <ChartLegend content={<ChartLegendContent />} />
-          <Line dataKey="visits" stroke="var(--color-visits)" />
-          <Line dataKey="signups" stroke="var(--color-signups)" />
+          <Line dataKey="visits" stroke="var(--color-visits)" isAnimationActive={false} />
+          <Line dataKey="signups" stroke="var(--color-signups)" isAnimationActive={false} />
         </LineChart>
       </ChartContainer>,
     );
+    expect(container.querySelector("[data-chart]")).toBeTruthy();
     expect(container.querySelector("svg")).toBeTruthy();
   });
 
   it("renders a BarChart", () => {
     const { container } = render(
       <ChartContainer config={config} className="h-40 w-80">
-        <BarChart data={data}>
+        <BarChart data={data} width={320} height={160}>
           <XAxis dataKey="name" />
           <YAxis />
           <ChartTooltip content={<ChartTooltipContent />} />
-          <Bar dataKey="visits" fill="var(--color-visits)" />
+          <Bar dataKey="visits" fill="var(--color-visits)" isAnimationActive={false} />
         </BarChart>
       </ChartContainer>,
     );
+    expect(container.querySelector("[data-chart]")).toBeTruthy();
     expect(container.querySelector("svg")).toBeTruthy();
   });
 });
