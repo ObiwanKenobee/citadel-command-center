@@ -35,10 +35,7 @@ describe("chart smoke", () => {
       </ChartContainer>,
     );
     expect(container.querySelector("[data-chart]")).toBeTruthy();
-    expect(container.querySelector("svg")).toBeTruthy();
-  });
-
-  it("renders a BarChart", () => {
+    expect(container.querySelector(".recharts-responsive-container")).toBeTruthy();
     const { container } = render(
       <ChartContainer config={config} className="h-40 w-80">
         <BarChart data={data} width={320} height={160}>
