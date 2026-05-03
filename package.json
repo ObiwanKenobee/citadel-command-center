@@ -10,7 +10,11 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check:chart-deps": "node scripts/check-chart-deps.mjs",
+    "clean-install": "rm -rf node_modules .vite dist && bun install --frozen-lockfile",
+    "verify": "bun run check:chart-deps && bun run typecheck && bun run build && bun run test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
