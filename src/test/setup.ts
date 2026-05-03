@@ -1,5 +1,16 @@
 import "@testing-library/jest-dom";
 
+class ResizeObserverMock {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+(globalThis as any).ResizeObserver = ResizeObserverMock;
+if (typeof window !== "undefined") (window as any).ResizeObserver = ResizeObserverMock;
+if (typeof window !== "undefined") {
+  (window as any).HTMLElement.prototype.scrollIntoView = () => {};
+}
+
 Object.defineProperty(window, "matchMedia", {
   writable: true,
   value: (query: string) => ({

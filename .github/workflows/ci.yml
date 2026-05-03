@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install (frozen lockfile)
+        run: bun install --frozen-lockfile
+      - name: Verify chart dep versions
+        run: bun run check:chart-deps
+      - name: Typecheck
+        run: bunx tsc --noEmit
+      - name: Production build
+        run: bun run build
+      - name: Test
+        run: bun run test
